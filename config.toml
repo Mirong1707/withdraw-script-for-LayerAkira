@@ -1,0 +1,55 @@
+node_url = "https://starknet-mainnet.public.blastapi.io/rpc/v0_7"
+core_address = '0x51c728df04707161676ff0d1fdff99d73e7f9bdd313fdccb9f4f71747aed024'
+executor_address = '0x7e684cf1d9b3e511cbc36bd75805726e11430607859f205930dbfa910a04e16'
+router_address = '0x65b58ddf6222da0bba453b59f472d18cab9d0dbc4839f19c4d4179044257353'
+http = 'https://api.layerakira.xyz'
+wss = 'wss://api.layerakira.xyz/ws'
+gas_oracle_skew_multiplier = 2
+is_testnet = false
+verbose = true
+
+trading_account = {account_address ='0x123', public_key='0x123', private_key="."}
+
+
+[[gas_action]]
+ecosystem = true
+action = 'swap'
+steps = 150
+
+[[gas_action]]
+ecosystem = false
+action = 'swap'
+steps = 250
+
+[[gas_action]]
+ecosystem = true
+action = 'withdraw'
+steps = 150
+
+[[gas_action]]
+ecosystem = true
+action = 'nonce'
+steps = 100
+
+# ERC tokens definitons
+
+[[ERC20]]
+symbol = "ETH"
+address = "0x49d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7"
+decimals = 18
+
+[[ERC20]]
+symbol = "STRK"
+address = "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d"
+decimals = 18
+
+[[ERC20]]
+symbol = "USDC"
+address = "0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8"
+decimals = 6
+
+[[ERC20]]
+symbol = "USDT"
+address = "0x068f5c6a61780768455de69077e07e89787839bf8166decfbf92b645209c0fb8"
+decimals = 6
+
