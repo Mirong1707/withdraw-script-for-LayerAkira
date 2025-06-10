@@ -1,2 +1,3 @@
 asyncio~=3.4.3
-LayerAkira~=1.0.0a51
+LayerAkiraSDK~=1.0.0a94
+starknet-py~=0.25.0

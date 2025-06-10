@@ -22,20 +22,24 @@ class CustomCLIClient(CLIClient):
 
         node_client = FullNodeClient(node_url=self.cli_cfg.node)
         erc_to_addr = {token.symbol: token.address for token in self.cli_cfg.tokens}
-        contract_client = AkiraExchangeClient(node_client, self.cli_cfg.core_address,
-                                              self.cli_cfg.executor_address, self.cli_cfg.router_address,
+        contract_client = AkiraExchangeClient(node_client,
+                                              self.cli_cfg.core_address,
+                                              self.cli_cfg.executor_address,
+                                              self.cli_cfg.router_address,
+                                              self.cli_cfg.snip9_address,
                                               erc_to_addr)
         await contract_client.init()
 
         sn_hasher = SnTypedPedersenHasher(erc_to_addr, domain, self.cli_cfg.core_address,
                                           self.cli_cfg.executor_address)
-        self._erc_to_decimals = {token.symbol: token.decimals for token in self.cli_cfg.tokens}
         api_client = AsyncApiHttpClient(sn_hasher, lambda msg_hash, pk: message_signature(msg_hash, pk),
-                                        self._erc_to_decimals, self.cli_cfg.http, self.cli_cfg.verbose)
+                                        self._erc_to_decimals, self.cli_cfg.http,
+                                        verbose=self.cli_cfg.verbose)
 
         self.exchange_client = JointHttpClient(node_client, api_client, contract_client,
                                                self.cli_cfg.core_address,
                                                self.cli_cfg.executor_address,
+                                               self.cli_cfg.invoker_address,
                                                erc_to_addr,
                                                self._erc_to_decimals,
                                                self.cli_cfg.chain_id,
@@ -71,8 +75,8 @@ class CustomCLIClient(CLIClient):
             # ['bind_to_signer', []],  # binds trading account to public key, can be invoked onlu once for trading account
             ['r_auth', []],  # issue jwt token
 
-            # ['display_chain_info', []],  # print chain info
-            # ['query_gas', []],  # query gas price
+            ['display_chain_info', []],  # print chain info
+            ['query_gas', []],  # query gas price
             ['user_info', []],  # query and ecosystem in Client user info from exchange
             ['start_ws', [self.cli_cfg.trading_account[1]]],
             ['sleep', []],
@@ -80,6 +84,10 @@ class CustomCLIClient(CLIClient):
             # ['subscribe_book', ['bbo', 'ETH', 'USDC', '1']],
             # ['subscribe_book', ['snap', 'ETH', 'USDC', '1']],
             ['subscribe_fills', [self.cli_cfg.trading_account[0]]],
+            # ['approve_exchange', ['STRK', '1']],
+            # deposit
+
+
 
         ]
 
