@@ -75,7 +75,7 @@ class WithdrawClient(CustomCLIClient):
             current_signer: ContractAddress = signer_result.data if hasattr(signer_result, 'data') else signer_result
             print(current_signer)
             
-            if current_signer.as_str() == 0 or current_signer is None:
+            if current_signer.as_int() == 0 or current_signer is None:
                 print("Signer not bound, binding to signer...")
                 with suppress_stdout():
                     bind_result = await self.handle_request(self.exchange_client, 'bind_to_signer', [], 

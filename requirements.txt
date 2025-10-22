@@ -1,3 +1,4 @@
-asyncio~=3.4.3
-LayerAkiraSDK~=1.0.0a94
-starknet-py~=0.25.0
+# Install LayerAkiraSDK from TestPyPI:
+# pip install -i https://test.pypi.org/simple/ LayerAkiraSDK==1.0.0a105 --extra-index-url https://pypi.org/simple
+LayerAkiraSDK==1.0.0a105
+starknet-py==0.27.0
